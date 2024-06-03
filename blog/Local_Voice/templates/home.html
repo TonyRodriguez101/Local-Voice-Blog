@@ -10,10 +10,14 @@
 {% for post in object_list %}
     <li><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> - {{ post.author.first_name }}
 <!--href="{% url 'article-detail' post.pk %}" -> le pasamos el id del post que fue clicado. -->
-        {{ post.author.last_name }}  - <a href="{% url 'update_post' post.pk %}">(Edit)</a> 
-        - <a href="{% url 'delete_post' post.pk %}">(Delete)</a><br>
+        {{ post.author.last_name }} - {{ post.post_date }} 
+        
+        {% if user.is_authenticated %}
+            - <a href="{% url 'update_post' post.pk %}">(Edit)</a> 
+            - <a href="{% url 'delete_post' post.pk %}">(Delete)</a><br>
+        {% endif %}
 
-    {{ post.body }}</li>
+    {{ post.body|slice:":300" }}</li> 
 
 {% endfor%}
 </ul>

@@ -3,16 +3,23 @@
 
 {% block content %}
     
+{% if user.is_authenticated %}
 
 
-<h1>Add Blog Post</h1>
-<div class="form-group">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <button class="btn btn-secondary">Post</button>
-    </form>
-</div>
+    <h1>Add Blog Post</h1>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button class="btn btn-secondary">Post</button>
+        </form>
+    </div>
+
+{% else %}
+
+You are not is_authenticated! Please Login
+
+{% endif %}
 
 
 {% endblock %}
